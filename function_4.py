@@ -5,7 +5,7 @@ def max_number(a, b):
         return b
 
 
-def autotest_max_number(a, b):
+def autotest_max_number():
     assert max_number(3, 2) == 3, "Ошибка: большее число должно быть 3"
     assert max_number(-1, 1) == 1, "Ошибка: большее число должно быть 1"
     assert max_number(0, 0) == 0, "Ошибка: оба числа равны 0"
@@ -13,13 +13,15 @@ def autotest_max_number(a, b):
 print("Тест пройден")
 
 
+autotest_max_number()
+
+
 def empty_function():
     pass
 
 
 def even_numbers(n):
-    for i in range(n + 1):
-        if i % 2 == 0:
+    for i in range(0, n + 1, 2):
             yield i
 
 try:
