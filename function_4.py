@@ -10,10 +10,7 @@ def autotest_max_number():
     assert max_number(-1, 1) == 1, "Ошибка: большее число должно быть 1"
     assert max_number(0, 0) == 0, "Ошибка: оба числа равны 0"
     assert max_number(-5, -6) == -5, "Ошибка: большее число должно быть -5"
-print("Тест пройден")
-
-
-autotest_max_number()
+    print("Тест пройден")
 
 
 def empty_function():
@@ -34,4 +31,4 @@ finally:
     print("Программа завершена")
 
 
-
+autotest_max_number()
