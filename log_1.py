@@ -2,7 +2,7 @@ age = int(input("Укажите свой возраст: "))
 citizen = input("Являетесь ли вы гражданином страны? (да/нет): ")
 police = input("Имеется  ли у вас судимость? (да/нет): ")
 
-if age >= 18 and citizen == "да"and police  == "нет":
+if age >= 18 and citizen.lower() == 'да' and police.lower()  == 'нет':
     print("Вы можете проголосовать на выборах")
 else:
     print("Вы не можете проголосовать на выборах")
