@@ -1,5 +1,5 @@
+password = "123456"
 while True:
-    password = "123456"
     input_pass = input("Введите пароль: ")
     if input_pass != password:
         print("Вы ввели неправильный пароль. Повторите ввод.")
