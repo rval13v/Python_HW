@@ -7,7 +7,6 @@ while True:
         elif number == 0:
             print("Введите число больше нуля.")
             continue
-
         while number != -1:
             print("Счетчик =", number)
             number -= 1
