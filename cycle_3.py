@@ -19,7 +19,7 @@ def vovels_sum(input_text):
         if char in vovels:
             count += 1
     print("Vowels:", count)
-
+    return input_text
 
 def counter(words):
     same = {} # Создаем пустой словарь
@@ -33,7 +33,7 @@ def counter(words):
     return dict(sorted_values) # Возвращаем отсортированный словарь
 
 
-input_text = str(input("Введите текст: ")).strip().lower() #strip() — удаляет пробелы в начале и в конце строки.
+input_text = input("Введите текст: ").strip().lower() #strip() — удаляет пробелы в начале и в конце строки.
 # lower() — переводит текст в нижний регистр (чтобы не различать слова по регистру)
 
 
