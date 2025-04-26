@@ -18,8 +18,7 @@ def vovels_sum(input_text):
     # Если символ — гласная, увеличиваем счётчик count.
         if char in vovels:
             count += 1
-    print("Vowels:", count)
-    return input_text
+    return count
 
 def counter(words):
     same = {} # Создаем пустой словарь
@@ -38,7 +37,7 @@ input_text = input("Введите текст: ").strip().lower() #strip() — �
 
 
 words = cycle(input_text)
-vovels_sum(input_text)
+print("Vovels:", vovels_sum(input_text))
 print("Word frequencies:", counter(words))
 
 
