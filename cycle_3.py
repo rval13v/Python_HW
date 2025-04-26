@@ -1,5 +1,3 @@
-input_text = str(input("Введите текст: ")).strip().lower() #strip() — удаляет пробелы в начале и в конце строки.
-# lower() — переводит текст в нижний регистр (чтобы не различать слова по регистру)
 def cycle(input_text):
     punctuation = '''()-[]{};:"\\,<>./?@#$%^&*_~'''  # Создаётся строка punctuation,
     # содержащая все символы пунктуации, которые мы хотим удалить из текста.
@@ -14,7 +12,7 @@ def cycle(input_text):
 
 
 def vovels_sum(input_text):
-    vovels = "аеёиоуыэюя"
+    vovels = "аеёиоуыэюяaeiouy"
     count = 0 #Переменная count cчётчик гласных.
     for char in input_text: # Проходим по каждому символу оригинального текста (с учетом пунктуации).
     # Если символ — гласная, увеличиваем счётчик count.
@@ -33,6 +31,10 @@ def counter(words):
     sorted_values = sorted(same.items(), key=lambda tpl: tpl[1], reverse=True )
     # Сортируем элементы  словаря по значению tpl[1] в порядке убывания (reverse=True )
     return dict(sorted_values) # Возвращаем отсортированный словарь
+
+
+input_text = str(input("Введите текст: ")).strip().lower() #strip() — удаляет пробелы в начале и в конце строки.
+# lower() — переводит текст в нижний регистр (чтобы не различать слова по регистру)
 
 
 words = cycle(input_text)
