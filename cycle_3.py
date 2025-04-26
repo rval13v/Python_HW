@@ -1,12 +1,8 @@
-punctuation = '''()-[]{};:"\\,<>./?@#$%^&*_~''' # Создаётся строка punctuation,
-# содержащая все символы пунктуации, которые мы хотим удалить из текста.
-
-
 input_text = str(input("Введите текст: ")).strip().lower() #strip() — удаляет пробелы в начале и в конце строки.
 # lower() — переводит текст в нижний регистр (чтобы не различать слова по регистру)
-
-
 def cycle(input_text):
+    punctuation = '''()-[]{};:"\\,<>./?@#$%^&*_~'''  # Создаётся строка punctuation,
+    # содержащая все символы пунктуации, которые мы хотим удалить из текста.
     text_new = "".join(char for char in input_text if char not in punctuation) #Генератор перебирает каждый символ
     # в input_text. Если символ не в punctuation, он добавляется к новой строке text_new
     words = text_new.split() # Разбиваем очищенный текст на слова по пробелам, получаем список words
@@ -14,7 +10,7 @@ def cycle(input_text):
     word_count = len(words) # Подсчитываем общее количество слов
     print("Words:", word_count)
     print("Longest word:", longest_word)
-    return words, text_new
+    return words
 
 
 def vovels_sum(input_text):
@@ -39,10 +35,9 @@ def counter(words):
     return dict(sorted_values) # Возвращаем отсортированный словарь
 
 
-words, text_new = cycle(input_text)
+words = cycle(input_text)
 vovels_sum(input_text)
-word_same = counter(words)
-print("Word frequencies:", word_same)
+print("Word frequencies:", counter(words))
 
 
 # Заметки
