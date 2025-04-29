@@ -1,5 +1,3 @@
 cars = ['BMW', 'Audi', 'Mercedes', 'Volvo', 'Opel']
-cars[0] = 'Toyota'
-cars[4] = 'Nissan'
-for item in cars: # каждый элемент списка на новой строке:
-    print(item)
+cars[0], cars[4] = cars[4], cars[0]
+print(cars)
