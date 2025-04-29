@@ -1,5 +1,5 @@
 n = 100
-even_numbers = [i for i in range(0, n + 1, 2)]
+even_numbers = [i for i in range(n + 1) if i % 2 == 0]
 result = sum(even_numbers)
 print(f"Сумма четных чисел от 0 до {n}: {result}")
 
