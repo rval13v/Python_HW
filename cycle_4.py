@@ -1,20 +1,25 @@
+def sum_even(n): # Функция принимает параметр n
+    return sum(i for i in range(0, n+1, 2))
 n = 100
-even_numbers = [i for i in range(n + 1) if i % 2 == 0]
-result = sum(even_numbers)
-print(f"Сумма четных чисел от 0 до {n}: {result}")
+print(f"Сумма четных чисел от 1 до {n}: {sum_even(n)}")
 
 
+def square(x): # Функция принимает параметр x
+    return [i ** 2 for i in range(1, x+1) if i % 2 != 0] # последовательность чисел от 1 до x (включительно), if i % 2 != 0 происходит фильтрация, оставляя только нечётные числа и возводим в квадрат.
 x = 10
-print("Квадраты нечетных чисел от 0 до", x)
-squares = [i ** 2 for i in range(1, x + 1) if i % 2 != 0]
-print(squares)
+print(f"Квадраты нечетных чисел от 1 до {x}:")
+print(square(x))
 
 
-count = 0 # Создаем счетчик
-while True:
-    number = int(input("Введите число: "))
-    if number > 0:
-        count += 1 # Если число положительное, то увеличиваем счетчик на 1
-    elif number < 0:
-        print("Счетчик:", count)  # Выводим количество введенных положительных чисел
-        break  # Прерываем цикл, когда введено отрицательное число
+def count_positive():
+    count = 0 # Создаем счетчик
+    while True:
+        number = int(input("Введите число: "))
+        if number > 0:
+            count += 1 # Если число положительное, то увеличиваем счетчик на 1
+        elif number < 0:
+            print("Счетчик:", count)  # Выводим количество введенных положительных чисел
+            break  # Прерываем цикл, когда введено отрицательное число
+
+
+count_positive()
