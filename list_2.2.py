@@ -1,12 +1,24 @@
-numbers_1 = [1, 2, 3, 4, 7, 4] # Создаем два списка чисел
-numbers_2 = [1, 2, 3, 3, 3]
+numbers_1 = [1, 2, 3, 4, 7, 4, 5]
+numbers_2 = [1, 2, 3, 3, 3, 7, 7, 6]
 
+if len(numbers_1) > len(numbers_2):  # Сравниваем длину
+    longer = numbers_1
+    shorter = numbers_2
+elif len(numbers_1) < len(numbers_2):
+    longer = numbers_2
+    shorter = numbers_1
+else:
+    longer = numbers_1  # Если длины равны.
+    shorter = numbers_2
 
-max_len = max(len(numbers_1), len(numbers_2)) # len(numbers_1)- это длина списка. А функ-я max возращает бОльшее из 2х чисел (максимальная длина из двух списков). Тут max_len равен 6, значит цикл будет от 0 до 5 включительно 
-result = [] # Создаем пустой список, в него будут добавляться суммы чисел по очереди с одинак. индексами из 2х списков.
-for i in range(max_len): # Цикл на 6 шагов, проходимя по индексам, i будет принимать значения 0,1,2,3,4,5 
-    a = numbers_1[i] if i < len(numbers_1) else 0 # Если индекс i  есть - берем значение, иначе 0.
-    b = numbers_2[i] if i < len(numbers_2) else 0
-    result.append(a + b) # Складываем а и б и добавляем сумму в результат.
+result = []
 
-print(result)
+def sum_lists():
+    for i in range(len(shorter)):  # Индексы по длине короткого списка
+        result.append(shorter[i] + longer[i])  # Складываем по индексам
+    for i in range(len(shorter), len(longer)):
+        result.append(longer[i])  # Добавляем остаток из длинного списка
+
+    print(result)
+
+sum_lists()
