@@ -3,18 +3,14 @@ def sum_lists(longer, shorter):
     for i in range(len(shorter)):  # Складываем элементы по индексам
         result.append(shorter[i] + longer[i])
 
-    for i in range(len(shorter), len(longer)):  # Добавляем оставшиеся элементы длинного списка
-        result.append(longer[i])
+    start_index = len(shorter)
+    result.extend(longer[start_index:])
 
     return result
 
 def check_lists(numbers_1, numbers_2):
-    if len(numbers_1) > len(numbers_2):  # Сравниваем длину
-        longer = numbers_1
-        shorter = numbers_2
-    else:
-        longer = numbers_2
-        shorter = numbers_1
+    longer = max(numbers_1, numbers_2, key=len)
+    shorter = min(numbers_1, numbers_2, key=len)
 
     return sum_lists(longer, shorter)
 
