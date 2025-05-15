@@ -47,8 +47,11 @@ def all_students(students):
     total = 0
     for student in students:
         total += calculate_average(student["grades"])
-        all_average = round(total / len(students), 2)
-        print(f"Общий средний балл всех студентов: {all_average}")
+    all_average = round(total / len(students), 2)
+    print(f"Общий средний балл всех студентов: {all_average}")
 
 
 all_students(students)
+
+
+
