@@ -18,7 +18,7 @@ def add_student():
                 print("Введите балл от 0 до 100")
         except ValueError:
             print("Ошибка! Введите балл от 0 до 100!")
-            student = dict(name=student, grades=grade)
+    student = dict(name=student_name, grades=grades)
     return student
 
 def student_average(students):
@@ -28,7 +28,6 @@ def student_average(students):
             status = "Успешен"
         else:
             status = "Неуспешен"
-
         print(f"Студент: {student['name']}\nСтатус: {status}")
         print(f"Средний балл у {student['name']}: {avg}\n")
 
@@ -47,7 +46,7 @@ def overall_average(students):
 students = [
     {"name": "Harry", "grades": [90, 58, 76]},
     {"name": "Hermione", "grades": [90, 85, 86]},
-    {"name": "Ron", "grades": [60, 68, 75]},
+    {"name": "Ron", "grades": [90, 68, 75]},
     {"name": "Draco", "grades": [70, 93, 74]}
 ]
 
