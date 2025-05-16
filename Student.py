@@ -55,3 +55,7 @@ student_average(students)
 students.append(add_student())
 student_reduction(students)
 overall_average(students)
+
+print("\nОбновлённый список студентов:")
+for student in students:
+    print(f"Имя: {student['name']}, Баллы: {student['grades']}, Средний балл: {calculate_average(student['grades'])}")
