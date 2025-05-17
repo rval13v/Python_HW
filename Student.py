@@ -41,8 +41,15 @@ def overall_average(students):
     for student in students:
         total += calculate_average(student["grades"])
     all_average = round(total / len(students), 2)
-    print(f"Общий средний балл всех студентов: {all_average}")
+    print(f"\nОбщий средний балл всех студентов: {all_average}")
 
+def update_list_students(students):
+    print("\nОбновлённый список студентов:")
+    for student in students:
+        print(f"Имя: {student['name']}, Баллы: {student['grades']}, Средний балл: {calculate_average(student['grades'])}")
+        
+    
+    
 students = [
     {"name": "Harry", "grades": [90, 58, 76]},
     {"name": "Hermione", "grades": [90, 85, 86]},
@@ -54,8 +61,5 @@ students = [
 student_average(students)
 students.append(add_student())
 student_reduction(students)
+update_list_students(students)
 overall_average(students)
-
-print("\nОбновлённый список студентов:")
-for student in students:
-    print(f"Имя: {student['name']}, Баллы: {student['grades']}, Средний балл: {calculate_average(student['grades'])}")
