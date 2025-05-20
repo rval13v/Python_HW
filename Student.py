@@ -1,5 +1,5 @@
 def calculate_average(grades): # определение функции, которая будет рассчитывать ср.знач из списка grades
-    if len(grades) == 0: # если список grades пустой, функция возвращает 0, чтобы избежать деления на 0
+    if not grades:
         return 0
     average = sum(grades) / len(grades) # считаем среднее
     return round(average, 2)
@@ -19,9 +19,7 @@ def student_average(students): # информ о студенте
             status = "Успешен"
         else:
             status = "Неуспешен"
-        print(f"\nСтудент: {student['name']}")
-        print(f"Статус: {status}")
-        print(f"Средний балл: {avg}")
+        print(f"\nСтудент: {student['name']}, \n\tСтатус: {status} \n\tСредний балл: {avg}")
 
 
 def student_reduction(students):
@@ -42,7 +40,7 @@ def overall_average(students): # общий Средний балл
 def update_list_students(students):
     print("\nОбновлённый список студентов:")
     for student in students:
-        print(f"{student['name']}, Баллы: {student['grades']}, Средний балл: {calculate_average(student['grades'])}")
+        print(f"\n{student['name']}, Баллы: {student['grades']}, Средний балл: {calculate_average(student['grades'])}")
 
 
 students = [
