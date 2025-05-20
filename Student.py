@@ -1,8 +1,8 @@
 def calculate_average(grades): # определение функции, которая будет рассчитывать ср.знач из списка grades
     if not grades:
         return 0
-    average = sum(grades) / len(grades) # считаем среднее
-    return round(average, 2)
+    return round(sum(grades) / len(grades), 2) # считаем среднее
+     
 
 
 def add_student(name, grades): # функция создает студента по имени и списку баллов
@@ -20,6 +20,8 @@ def student_average(students): # информ о студенте
         else:
             status = "Неуспешен"
         print(f"\nСтудент: {student['name']}, \n\tСтатус: {status} \n\tСредний балл: {avg}")
+
+
 
 
 def student_reduction(students):
