@@ -12,7 +12,6 @@ def add_student(name, grades): # функция создает студента 
 
 
 def student_average(students): # информ о студенте
-    print("\nCписок студентов:")
     for student in students: # перебирает всех студентов в списке
         avg = calculate_average(student["grades"]) # считает Средний балл
         if avg >= 75:
@@ -45,7 +44,7 @@ students = [
     {"name": "Draco", "grades": [70, 93, 74]}
 ]
 
-
+print("\nТекущий список студентов:")
 student_average(students) # вызов текущий студентов и их Статус
 
 
@@ -74,7 +73,6 @@ except ValueError as e: # переменная в которую ловится 
 else:
     student_reduction(students)
 
-
+print("\nОбновленный список студентов:")
 student_average(students)
 overall_average(students)
-
