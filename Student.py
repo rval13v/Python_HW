@@ -1,19 +1,35 @@
-def calculate_average(grades): # определение функции, которая будет рассчитывать ср.знач из списка grades
+def calculate_average(grades):
     if not grades:
         return 0
-    return round(sum(grades) / len(grades), 2) # считаем среднее
-
-     
-def add_student(name, grades): # функция создает студента по имени и списку баллов
-    if not grades: # если баллы отсут, то raise
-        print("Нужно ввести хотя бы один балл.")
-        return
-    return {"name": name, "grades": grades} # возвращает словарь, представляющий студента
+    return round(sum(grades) / len(grades), 2)
 
 
-def student_average(students): # информ о студенте
-    for student in students: # перебирает всех студентов в списке
-        avg = calculate_average(student["grades"]) # считает Средний балл
+def add_student(name):
+    grades = []
+    print("Введите баллы (по одному). Чтобы закончить — нажмите Enter без ввода.")
+    while True:
+        grade_input = input(f"Балл {len(grades) + 1}: ").strip()
+        if grade_input == "":
+            break
+        try:
+            grade = int(grade_input)
+            if 0 <= grade <= 100:
+                grades.append(grade)
+            else:
+                print("Балл должен быть от 0 до 100.")
+        except ValueError:
+            print("Ошибка! Введите число.")
+
+    if not grades:
+        print("Не введено ни одного балла. Студент не будет добавлен.")
+        return None
+
+    return {"name": name, "grades": grades}
+
+
+def student_average(students):
+    for student in students:
+        avg = calculate_average(student["grades"])
         if avg >= 75:
             status = "Успешен"
         else:
@@ -22,56 +38,46 @@ def student_average(students): # информ о студенте
 
 
 def student_reduction(students):
-    new_average = min(students, key=lambda s: calculate_average(s['grades'])) # находит студента с мин ср баллом
-    students.remove(new_average) # удаляет студента
-    print(f"Удален студент с самым низким средним баллом: {new_average['name']} ({calculate_average(new_average['grades'])})\n")
-
-
-def overall_average(students): # общий Средний балл
     if not students:
-        print("\nСтуденты отсутвуют")
+        return
+    new_average = min(students, key=lambda s: calculate_average(s['grades']))
+    students.remove(new_average)
+    print(f"\nУдален студент с самым низким средним баллом: {new_average['name']} ({calculate_average(new_average['grades'])})")
+
+
+def overall_average(students):
+    if not students:
+        print("\nСтуденты отсутствуют")
         return
     total = sum(calculate_average(student["grades"]) for student in students)
     all_average = round(total / len(students), 2)
     print(f"\nОбщий средний балл всех студентов: {all_average}")
 
 
-   
+
 students = [
-    {"name": "Harry", "grades": [90, 58, 76]},
+    {"name": "Harry", "grades": [90, 98, 76]},
     {"name": "Hermione", "grades": [90, 85, 86]},
     {"name": "Ron", "grades": [90, 68, 75]},
-    {"name": "Draco", "grades": [70, 93, 74]}
+    {"name": "Draco", "grades": [90, 93, 74]}
 ]
 
 print("\nТекущий список студентов:")
-student_average(students) # вызов текущий студентов и их Статус
+student_average(students)
 
 
-input_text = input("\nВведите имя нового студента: ").strip()
-grades = [] # пустой список для баллов в который вводим баллы 
-
-print("Введите баллы (по одному). Чтобы закончить — нажмите Enter без ввода.")
-
-while True: # бесконечный цикл ввожа оценок, пока не наступит break
-    grade_input = input(f"Балл {len(grades) + 1}: ").strip() # выводит запрос баллов по очереди
-    if grade_input == "": # если нажат пустой Enter
-        break
-    try:
-        grade = int(grade_input)
-        if 0 <= grade <= 100:   
-            grades.append(grade)
-        else:
-            print("Балл должен быть от 0 до 100.")
-    except ValueError:
-        print("Ошибка! Введите число.")
-
-try:
-    students.append(add_student(input_text, grades))
-except ValueError as e: # переменная в которую ловится Ошибка
-    print(f"Ошибка: {e}")
+input_text = input("\nВведите имя нового студента: ").strip() # Ввод нового студента
+if input_text:
+    new_student = add_student(input_text)
+    if new_student:
+        students.append(new_student)
+        print(f"\nДобавлен студент: {new_student['name']}")
 else:
-    student_reduction(students)
+    print("Имя не введено. Добавление пропущено.")
+
+
+student_reduction(students) # Удаление студента с самым низким средним баллом
+
 
 print("\nОбновленный список студентов:")
 student_average(students)
