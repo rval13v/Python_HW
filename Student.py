@@ -49,8 +49,9 @@ def overall_average(students):
     if not students:
         print("\nСтуденты отсутствуют")
         return
-    total = sum(calculate_average(student["grades"]) for student in students)
-    all_average = round(total / len(students), 2)
+    
+    total = [grade for student in students for grade in student["grades"]]
+    all_average = calculate_average(total)
     print(f"\nОбщий средний балл всех студентов: {all_average}")
 
 
