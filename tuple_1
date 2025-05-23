@@ -1,0 +1,15 @@
+def get_unique_elements(input_list):
+    unique_numbers = set(input_list)
+    count = len(unique_numbers)
+    return unique_numbers, count
+
+
+input_string = input("Введите элементы списка через пробел: ").strip()
+input_list = input_string.split()
+
+
+unique_numbers, count = get_unique_elements(input_list)
+
+
+print(f"Уникальные элементы: {unique_numbers}")
+print(f"Количество уникальных элементов: {count}")
