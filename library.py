@@ -6,27 +6,24 @@ def book_list_view(library):
             status = "Доступность неизвестна"
         else:
             status = "Нет в наличии"
-        
+
         print(f"Книга: {title}\n\tАвтор: {details['author']},\n\tГод издания: {details['year']},\n\tСтатус: {status}\n")
 
 
 def add_book(title, author, year):
     library[title] = {"author": author, "year": year, "availability": None}
-    
-    
+
+
 def same_book(title):
     if title in library:
         print(f"Предупреждение: Книга '{title}' уже присутствует в библиотеке.")
         choice = input("Обновить данные книги? Да/Нет [y/n]: ").strip().lower()
         while choice not in ['y', 'n']:
             choice = input("Ошибка ввода. Повторите выбор: Да/Нет [y/n]: ").strip().lower()
-        if choice == 'y':
-            print("Данные книги были обновлены.")
-        else:
-            print("Изменений не внесено.")
+        return choice == 'y'
     else:
         print(f"Книга '{title}' не найдена в библиотеке. Она будет добавлена.")
-   
+        return True
 
 
 library = {
@@ -39,20 +36,15 @@ library = {
     "Код да Винчи": {"author": "Дэн Браун", "year": 2003, "availability": "y"},
     "Бойцовский клуб": {"author": "Чак Паланик", "year": 1996, "availability": "n"},
     "Азазель": {"author": "Борис Акунин", "year": 1998, "availability": "y"}
-    
+
 }
 
 title = input("Введите название книги: ")
-author = input("Введите автора книги: ")
-year = int(input("Введите год издания книги: "))
 
+if same_book(title):
+    author = input("Введите автора книги: ")
+    year = int(input("Введите год издания книги: "))
+    add_book(title, author, year)
 
-
-same_book(title)
-add_book(title, author, year)
 print("\nСписок книг в бибилиотеке: ")
 book_list_view(library)
-
-
-
-    
