@@ -11,8 +11,12 @@ def book_list_view(library):
 
 
 def add_book(title, author, year):
-    library[title] = {"author": author, "year": year, "availability": None}
+    if not title.strip() or not author.strip() or not year:
+        print("iguygitftfyg")
+        return
 
+    library[title] = {"author": author, "year": year, "availability": None}
+    print(f"Книга '{title}' успешно добавлена.")
 
 def same_book(title):
     if title in library:
@@ -39,12 +43,18 @@ library = {
 
 }
 
-title = input("Введите название книги: ")
+
+title = input("Введите название книги: ").strip().lower()
+
 
 if same_book(title):
     author = input("Введите автора книги: ")
-    year = int(input("Введите год издания книги: "))
-    add_book(title, author, year)
+    try:
+        year = int(input("Введите год издания книги: "))
+        add_book(title, author, year)
+    except ValueError:
+        print("Ошибка: год должен быть числом")
 
 print("\nСписок книг в бибилиотеке: ")
 book_list_view(library)
+
