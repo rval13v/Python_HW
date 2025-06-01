@@ -18,7 +18,7 @@ def add_book(title, author, year):
     library[title] = {"author": author, "year": year, "availability": None}
     print(f"Книга '{title}' успешно добавлена.")
     return True
-    
+
 
 def check_book(title):
     if title in library:
@@ -45,22 +45,23 @@ library = {
 
 }
 
-while True:
+# исправить, хуита какая то
+if check_book(title):
     title = input("Введите название книги: ").strip().lower()
-    if not title:
-        break
+    while not title:
+        title = input("Название книги обязательно. Пожалуйста, повторите ввод: ").strip()
+        
+        if check_book(title):
+            author = input("Введите автора книги: ").strip()
+            while not author:
+                author = input("Имя автора обязательно. Пожалуйста, повторите ввод: ").strip()
+            try:
+                year = int(input("Введите год издания книги: "))
+                if add_book(title, author, year):
+                    pass
+            except ValueError:
+                print("Ошибка: год должен быть числом")
 
-    if check_book(title):
-        author = input("Введите автора книги: ").strip()
-        while not author:
-            author = input("Имя автора обязательно. Пожалуйста, повторите ввод: ").strip()
-            
-        try:
-            year = int(input("Введите год издания книги: "))
-            if add_book(title, author, year):
-                pass
-        except ValueError:
-            print("Ошибка: год должен быть числом")
 
 print("\nСписок книг в бибилиотеке: ")
 book_list_view(library)
