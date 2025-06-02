@@ -54,12 +54,21 @@ if check_book(title):
     author = input("Введите автора книги: ").strip()
     while not author:
         author = input("Имя автора обязательно. Пожалуйста, повторите ввод: ").strip()
-    try:
-        year = int(input("Введите год издания книги: "))
-        if add_book(title, author, year):
-            pass
-    except ValueError:
-            print("Ошибка: год должен быть числом")
+        
+    while True:
+        year_input = input("Введите год издания книги: ").strip()
+        if not year_input:
+            print("Ошибка: год издания обязателен.")
+        else:
+            try:
+                year = int(year_input)
+                break  
+            except ValueError:
+                print("Ошибка: год должен быть целым числом.")
+            
+            
+    add_book(title, author, year)
+    
 
 print("\nСписок книг в бибилиотеке: ")
 book_list_view(library)
