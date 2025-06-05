@@ -1,3 +1,17 @@
+library = {
+    "Преступление и наказание": {"author": "Фёдор Достоевский", "year": 1866, "availability": "n"},
+    "Война и мир": {"author": "Лев Толстой", "year": 1869, "availability": "y"},
+    "1984": {"author": "Джордж Оруэлл", "year": 1949, "availability": "y"},
+    "Старик и море": {"author": "Эрнест Хемингуэй", "year": 1952, "availability": "y"},
+    "Процесс": {"author": "Франц Кафка", "year": 1925, "availability": "y"},
+    "Вишнёвый сад": {"author": "Антон Чехов", "year": 1904, "availability": "y"},
+    "Код да Винчи": {"author": "Дэн Браун", "year": 2003, "availability": "y"},
+    "Бойцовский клуб": {"author": "Чак Паланик", "year": 1996, "availability": "n"},
+    "Азазель": {"author": "Борис Акунин", "year": 1998, "availability": "y"}
+
+}
+
+
 def book_list_view(library):
     for title, details in library.items():
         if details["availability"] == "y":
@@ -32,22 +46,18 @@ def check_book(title):
         return True
 
 
-library = {
-    "Преступление и наказание": {"author": "Фёдор Достоевский", "year": 1866, "availability": "n"},
-    "Война и мир": {"author": "Лев Толстой", "year": 1869, "availability": "y"},
-    "1984": {"author": "Джордж Оруэлл", "year": 1949, "availability": "y"},
-    "Старик и море": {"author": "Эрнест Хемингуэй", "year": 1952, "availability": "y"},
-    "Процесс": {"author": "Франц Кафка", "year": 1925, "availability": "y"},
-    "Вишнёвый сад": {"author": "Антон Чехов", "year": 1904, "availability": "y"},
-    "Код да Винчи": {"author": "Дэн Браун", "year": 2003, "availability": "y"},
-    "Бойцовский клуб": {"author": "Чак Паланик", "year": 1996, "availability": "n"},
-    "Азазель": {"author": "Борис Акунин", "year": 1998, "availability": "y"}
-
-}
+def remove_book(title):
+    if title in library:
+        del library[title]
+        print(f"Книга '{title}' удалена из библиотеки")
+    else:
+        print(f"Книга '{title}' не найдена в библиотеке.")
+ 
 
 
 title = input("Введите название книги: ").strip()
 author = input("Введите автора книги: ").strip()
+
 
 try:
     year = int(input("Введите год издания книги: "))
@@ -61,5 +71,15 @@ else:
             add_book(title, author, year)
 
 
+
+
 print("\nСписок книг в библиотеке:")
+book_list_view(library)
+
+
+title_to_remove = input("Введите название книги для удаления: ").strip()
+remove_book(title_to_remove)
+
+
+print("\nОбновленный список книг в библиотеке:")
 book_list_view(library)
