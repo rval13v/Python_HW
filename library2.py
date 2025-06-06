@@ -54,6 +54,16 @@ def remove_book(title):
         print(f"Книга '{title}' не найдена в библиотеке.")
  
 
+def issue_book(title):
+    if title in library:
+        if library[title]["availability"] == "y":
+            library[title]["availability"] = "n"
+            print(f"Книга '{title}' выдана.")
+        else:
+            print(f"Книга '{title}' недоступна для выдачи.")
+    else:
+        print(f"Книга '{title}' не найдена в библиотеке.")
+
 
 title = input("Введите название книги: ").strip()
 author = input("Введите автора книги: ").strip()
@@ -80,6 +90,9 @@ book_list_view(library)
 title_to_remove = input("Введите название книги для удаления: ").strip()
 remove_book(title_to_remove)
 
+
+title_to_issue = input("Введите название книги для выдачи: ").strip()
+issue_book(title_to_issue)
 
 print("\nОбновленный список книг в библиотеке:")
 book_list_view(library)
