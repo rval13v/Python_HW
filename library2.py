@@ -11,7 +11,6 @@ library = {
 
 }
 
-
 def book_list_view(library):
     for title, details in library.items():
         if details["availability"] == "y":
@@ -56,7 +55,7 @@ def remove_book(title):
 
 def issue_book(title):
     if title in library:
-        if library[title]["availability"] == "y" or library[title]["availability"] is None:
+        if library[title]["availability"] != "n":
             library[title]["availability"] = "n"
             print(f"Книга '{title}' выдана.")
         else:
@@ -76,6 +75,21 @@ def return_book(title):
         print(f"Книга '{title}' не найдена в библиотеке.")
         
         
+def find_book(title):
+    if title in library:
+        details = library[title]
+        if details["availability"] == "y":
+            status = "В наличии"
+        elif details["availability"] is None:
+            status = "Доступность неизвестна"
+        else:
+            status = "Нет в наличии"
+            
+        print(f"Книга: {title}\n\tАвтор: {details['author']},\n\tГод издания: {details['year']},\n\tСтатус: {status}\n")
+    else:
+        print(f"Книга '{title}' не найдена в библиотеке.")
+      
+    
 title = input("Введите название книги: ").strip()
 author = input("Введите автора книги: ").strip()
 
@@ -111,3 +125,7 @@ return_book(title_to_return)
 
 print("\nОбновленный список книг в библиотеке:")
 book_list_view(library)
+
+
+title_to_find = input("Введите название книги для поиска: ").strip()
+find_book(title_to_find)
