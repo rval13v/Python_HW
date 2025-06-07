@@ -56,7 +56,7 @@ def remove_book(title):
 
 def issue_book(title):
     if title in library:
-        if library[title]["availability"] == "y":
+        if library[title]["availability"] == "y" or library[title]["availability"] is None:
             library[title]["availability"] = "n"
             print(f"Книга '{title}' выдана.")
         else:
