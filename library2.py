@@ -12,6 +12,8 @@ library = {
 }
 
 def book_list_view(library):
+    title = input("Введите название книги: ").strip()
+    author = input("Введите автора книги: ").strip()
     for title, details in library.items():
         if details["availability"] == "y":
             status = "В наличии"
@@ -46,6 +48,7 @@ def check_book(title):
 
 
 def remove_book(title):
+    title_to_remove = input("Введите название книги для удаления: ").strip()
     if title in library:
         del library[title]
         print(f"Книга '{title}' удалена из библиотеки")
@@ -54,6 +57,7 @@ def remove_book(title):
  
 
 def issue_book(title):
+    title_to_issue = input("Введите название книги для выдачи: ").strip()
     if title in library:
         if library[title]["availability"] != "n":
             library[title]["availability"] = "n"
@@ -65,6 +69,7 @@ def issue_book(title):
 
 
 def return_book(title):
+    title_to_return = input("Введите название книги для возврата: ").strip()
     if title in library:
         if library[title]["availability"] == "n":
             library[title]["availability"] = "y"
@@ -76,6 +81,7 @@ def return_book(title):
         
         
 def find_book(title):
+    title_to_find = input("Введите название книги для поиска: ").strip()
     if title in library:
         details = library[title]
         if details["availability"] == "y":
@@ -89,10 +95,6 @@ def find_book(title):
     else:
         print(f"Книга '{title}' не найдена в библиотеке.")
       
-    
-title = input("Введите название книги: ").strip()
-author = input("Введите автора книги: ").strip()
-
 
 try:
     year = int(input("Введите год издания книги: "))
@@ -107,25 +109,23 @@ else:
 
 
 
-
-print("\nСписок книг в библиотеке:")
-book_list_view(library)
-
-
-title_to_remove = input("Введите название книги для удаления: ").strip()
-remove_book(title_to_remove)
-
-
-title_to_issue = input("Введите название книги для выдачи: ").strip()
-issue_book(title_to_issue)
-
-title_to_return = input("Введите название книги для возврата: ").strip()
-return_book(title_to_return)
+menu = {
+    "1": {"Добавить книгу": add_book},
+    "2": {"Удалить книгу": remove_book},
+    "3": {"Выдать книгу": issue_book},
+    "4": {"Вернуть книгу": return_book},
+    "5": {"Найти книгу": find_book},
+    "6": {"Список книг": book_list_view},
+ }
 
 
-print("\nОбновленный список книг в библиотеке:")
-book_list_view(library)
+def main():
+    choice = input("Выберите пункт меню: ").strip()
+    
+    
+main()
+     
+    
 
 
-title_to_find = input("Введите название книги для поиска: ").strip()
-find_book(title_to_find)
+
