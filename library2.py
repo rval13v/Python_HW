@@ -11,9 +11,7 @@ library = {
 
 }
 
-def book_list_view(library):
-    title = input("Введите название книги: ").strip()
-    author = input("Введите автора книги: ").strip()
+def book_list_view():
     for title, details in library.items():
         if details["availability"] == "y":
             status = "В наличии"
@@ -25,39 +23,56 @@ def book_list_view(library):
         print(f"Книга: {title}\n\tАвтор: {details['author']},\n\tГод издания: {details['year']},\n\tСтатус: {status}\n")
 
 
-def add_book(title, author, year):
-    if not title.strip() or not author.strip() or not year:
-        print("Вы ничего не ввели, добавление пропущено")
-        return False
+def add_book():
+    title = input("Введите название книги: ").strip()
+    if not title:
+        print("Ошибка: название книги не может быть пустым")
+        return
+
+    if title in library:
+        print(f"Книга '{title}' уже есть в библиотеке.")
+        choice = input("Обновить данные книги? Да/Нет [y/n]: ").strip().lower()
+        while choice not in ['y', 'n']:
+            choice = input("Ошибка ввода. Повторите выбор: Да/Нет [y/n]: ").strip().lower()
+        if choice == 'n':
+            print("Добавление книги отменено.")
+            return
+        else:
+            print("Обновление данных книги.")
+    else:
+        print(f"Добавляем новую книгу '{title}'.")
+
+    author = input("Введите автора книги: ").strip()
+    if not author:
+        print("Ошибка: автор книги не может быть пустым")
+        return
+
+    try:
+        year = int(input("Введите год издания книги: "))
+    except ValueError:
+        print("Ошибка: год должен быть числом")
+        return
+
+    library[title] = {"author": author, "year": year, "availability": None}
+    print(f"Книга '{title}' успешно добавлена или обновлена.")
+
 
     library[title] = {"author": author, "year": year, "availability": None}
     print(f"Книга '{title}' успешно добавлена.")
     return True
 
 
-def check_book(title):
-    if title in library:
-        print(f"Предупреждение: Книга '{title}' уже присутствует в библиотеке.")
-        choice = input("Обновить данные книги? Да/Нет [y/n]: ").strip().lower()
-        while choice not in ['y', 'n']:
-            choice = input("Ошибка ввода. Повторите выбор: Да/Нет [y/n]: ").strip().lower()
-        return choice == 'y'
-    else:
-        print(f"Книга '{title}' не найдена в библиотеке. Она будет добавлена.")
-        return True
-
-
-def remove_book(title):
-    title_to_remove = input("Введите название книги для удаления: ").strip()
+def remove_book():
+    title = input("Введите название книги для удаления: ").strip()
     if title in library:
         del library[title]
         print(f"Книга '{title}' удалена из библиотеки")
     else:
         print(f"Книга '{title}' не найдена в библиотеке.")
- 
 
-def issue_book(title):
-    title_to_issue = input("Введите название книги для выдачи: ").strip()
+
+def issue_book():
+    title = input("Введите название книги для выдачи: ").strip()
     if title in library:
         if library[title]["availability"] != "n":
             library[title]["availability"] = "n"
@@ -68,8 +83,8 @@ def issue_book(title):
         print(f"Книга '{title}' не найдена в библиотеке.")
 
 
-def return_book(title):
-    title_to_return = input("Введите название книги для возврата: ").strip()
+def return_book():
+    title = input("Введите название книги для возврата: ").strip()
     if title in library:
         if library[title]["availability"] == "n":
             library[title]["availability"] = "y"
@@ -78,10 +93,10 @@ def return_book(title):
             print(f"Книга '{title}' уже есть в библиотеке.")
     else:
         print(f"Книга '{title}' не найдена в библиотеке.")
-        
-        
-def find_book(title):
-    title_to_find = input("Введите название книги для поиска: ").strip()
+
+
+def find_book():
+    title = input("Введите название книги для поиска: ").strip()
     if title in library:
         details = library[title]
         if details["availability"] == "y":
@@ -90,41 +105,49 @@ def find_book(title):
             status = "Доступность неизвестна"
         else:
             status = "Нет в наличии"
-            
+
         print(f"Книга: {title}\n\tАвтор: {details['author']},\n\tГод издания: {details['year']},\n\tСтатус: {status}\n")
     else:
         print(f"Книга '{title}' не найдена в библиотеке.")
-      
-
-try:
-    year = int(input("Введите год издания книги: "))
-except ValueError:
-    print("Ошибка: год должен быть числом")
-else:
-    if len(title) == 0 or len(author) == 0:
-        print("Ошибка: поля не заполнены")
-    else:
-        if check_book(title):
-            add_book(title, author, year)
-
 
 
 menu = {
-    "1": {"Добавить книгу": add_book},
-    "2": {"Удалить книгу": remove_book},
-    "3": {"Выдать книгу": issue_book},
-    "4": {"Вернуть книгу": return_book},
-    "5": {"Найти книгу": find_book},
-    "6": {"Список книг": book_list_view},
- }
+    "1": {"desc": "Добавить книгу", "func": add_book},
+    "2": {"desc": "Удалить книгу", "func": remove_book},
+    "3": {"desc": "Выдать книгу", "func": issue_book},
+    "4": {"desc": "Вернуть книгу", "func": return_book},
+    "5": {"desc": "Найти книгу", "func": find_book},
+    "6": {"desc": "Список книг", "func": book_list_view},
+    "0": {"desc": "Выход", "func": None}
+}
 
 
 def main():
-    choice = input("Выберите пункт меню: ").strip()
-    
-    
+    while True:
+        print("\nМеню:")
+        for key, item in menu.items():
+            print(f"{key}. {item['desc']}")
+
+        choice = input("Выберите пункт меню: ").strip()
+
+        if choice == "0":
+            print("Выход из программы.")
+            break
+        elif choice in menu:
+            action = menu[choice]["func"]
+            if action:
+                action()
+        else:
+            print("Неверный выбор. Повторите ввод.")
+
+
 main()
-     
+
+
+
+
+
+
     
 
 
