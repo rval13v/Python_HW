@@ -1,17 +1,52 @@
 library = {
-    "Преступление и наказание": {"author": "Фёдор Достоевский", "year": 1866, "availability": "n"},
-    "Война и мир": {"author": "Лев Толстой", "year": 1869, "availability": "y"},
-    "1984": {"author": "Джордж Оруэлл", "year": 1949, "availability": "y"},
-    "Старик и море": {"author": "Эрнест Хемингуэй", "year": 1952, "availability": "y"},
-    "Процесс": {"author": "Франц Кафка", "year": 1925, "availability": "y"},
-    "Вишнёвый сад": {"author": "Антон Чехов", "year": 1904, "availability": "y"},
-    "Код да Винчи": {"author": "Дэн Браун", "year": 2003, "availability": "y"},
-    "Бойцовский клуб": {"author": "Чак Паланик", "year": 1996, "availability": "n"},
-    "Азазель": {"author": "Борис Акунин", "year": 1998, "availability": "y"}
-
+    "Преступление и наказание": {
+        "author": "Фёдор Достоевский",
+        "year": 1866,
+        "availability": "n"
+    },
+    "Война и мир": {
+        "author": "Лев Толстой",
+        "year": 1869,
+        "availability": "y"
+    },
+    "1984": {
+        "author": "Джордж Оруэлл",
+        "year": 1949,
+        "availability": "y"
+    },
+    "Старик и море": {
+        "author": "Эрнест Хемингуэй",
+        "year": 1952,
+        "availability": "y"
+    },
+    "Процесс": {
+        "author": "Франц Кафка",
+        "year": 1925,
+        "availability": "n"
+    },
+    "Вишнёвый сад": {
+        "author": "Антон Чехов",
+        "year": 1904,
+        "availability": "y"
+    },
+    "Код да Винчи": {
+        "author": "Дэн Браун",
+        "year": 2003,
+        "availability": "y"
+    },
+    "Бойцовский клуб": {
+        "author": "Чак Паланик",
+        "year": 1996,
+        "availability": "n"
+    },
+    "Азазель": {
+        "author": "Борис Акунин",
+        "year": 1998,
+        "availability": "y"
+    }
 }
 
-def book_list_view():
+def book_list_view(title, author, year):
     for title, details in library.items():
         if details["availability"] == "y":
             status = "В наличии"
@@ -23,7 +58,7 @@ def book_list_view():
         print(f"Книга: {title}\n\tАвтор: {details['author']},\n\tГод издания: {details['year']},\n\tСтатус: {status}\n")
 
 
-def add_book():
+def add_book(main):
     title = input("Введите название книги: ").strip()
     if not title:
         print("Ошибка: название книги не может быть пустым")
@@ -55,14 +90,10 @@ def add_book():
 
     library[title] = {"author": author, "year": year, "availability": None}
     print(f"Книга '{title}' успешно добавлена или обновлена.")
-
-
-    library[title] = {"author": author, "year": year, "availability": None}
-    print(f"Книга '{title}' успешно добавлена.")
     return True
 
 
-def remove_book():
+def remove_book(main):
     title = input("Введите название книги для удаления: ").strip()
     if title in library:
         del library[title]
@@ -71,7 +102,7 @@ def remove_book():
         print(f"Книга '{title}' не найдена в библиотеке.")
 
 
-def issue_book():
+def issue_book(main):
     title = input("Введите название книги для выдачи: ").strip()
     if title in library:
         if library[title]["availability"] != "n":
@@ -83,7 +114,7 @@ def issue_book():
         print(f"Книга '{title}' не найдена в библиотеке.")
 
 
-def return_book():
+def return_book(main):
     title = input("Введите название книги для возврата: ").strip()
     if title in library:
         if library[title]["availability"] == "n":
@@ -95,7 +126,7 @@ def return_book():
         print(f"Книга '{title}' не найдена в библиотеке.")
 
 
-def find_book():
+def find_book(main):
     title = input("Введите название книги для поиска: ").strip()
     if title in library:
         details = library[title]
@@ -136,12 +167,15 @@ def main():
         elif choice in menu:
             action = menu[choice]["func"]
             if action:
-                action()
+                action(main)
         else:
             print("Неверный выбор. Повторите ввод.")
 
 
-main()
+if __name__ == "__main__":
+    
+    
+    main()
 
 
 
@@ -149,6 +183,3 @@ main()
 
 
     
-
-
-
