@@ -46,7 +46,7 @@ library = {
     }
 }
 
-def book_list_view(title, author, year):
+def book_list_view(main):
     for title, details in library.items():
         if details["availability"] == "y":
             status = "В наличии"
@@ -104,22 +104,32 @@ def remove_book(main):
 
 def issue_book(main):
     title = input("Введите название книги для выдачи: ").strip()
+    if not title:
+        print("Ошибка: название книги не может быть пустым")
+        return
+    
     if title in library:
-        if library[title]["availability"] != "n":
+        if library[title]["availability"] == "y":
             library[title]["availability"] = "n"
             print(f"Книга '{title}' выдана.")
-        else:
+        if library[title]["availability"] == "y" or library[title]["availability"] is None:
             print(f"Книга '{title}' недоступна для выдачи.")
-    else:
-        print(f"Книга '{title}' не найдена в библиотеке.")
+        else:
+            print(f"Книга '{title}' не найдена в библиотеке.")
 
 
 def return_book(main):
     title = input("Введите название книги для возврата: ").strip()
+    if not title:
+        print("Ошибка: название книги не может быть пустым")
+        return
+    
     if title in library:
         if library[title]["availability"] == "n":
             library[title]["availability"] = "y"
             print(f"Книга '{title}' возвращена.")
+        if library[title]["availability"] is None:
+            print(f"Книга '{title}' недоступна для возврата.")
         else:
             print(f"Книга '{title}' уже есть в библиотеке.")
     else:
