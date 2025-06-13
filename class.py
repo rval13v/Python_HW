@@ -58,13 +58,13 @@ todoList.add_task(Task("Проведение тестирования новог
 todoList.add_task(Task("Создание прототипа веб-приложения", 10, "Петрова Мария"))  
 todoList.add_task(Task("Организация новогоднего праздника", 15, "Сидоров Алексей"))         
 
+
 menu = {
-    "1": {"desc": "Показать все задачи", "func": todoList},
+    "1": {"desc": "Показать все задачи", "func": todoList.list_tasks},
     "2": {"desc": "Удалить задачу", "func": todoList.remove_task},
     "3": {"desc": "Отметить задачу выполненной", "func": todoList.complete_task},
-    "0": {"desc": "Выход", "func": None}
+    "0": {"desc": "Выход", "func": exit}
 }
-
 
 def main():
     while True:
@@ -86,6 +86,4 @@ def main():
 
 
 if __name__ == "__main__":
-    
-    
     main()
