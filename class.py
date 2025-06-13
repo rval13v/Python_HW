@@ -30,10 +30,9 @@ class ToDoList:
         for task in self.tasks:
             print(task)    
 
-    def remove_task(self, task_name): # Удаляем задачу по её названию. Метод remove_task принимает два аргумента:
-# self ссылающийся на текущий экземпляр класса.
+    def remove_task(self): # Удаляем задачу по её названию. Метод remove_task принимает два аргумента:# self ссылающийся на текущий экземпляр класса.
 # task_name название задачи, которую нужно удалить.
-        task_to_remove = input("Введите название задачи для удаления: ").strip()
+        task_name = input("Введите название задачи для удаления: ").strip().lower()
         for task in self.tasks[:]:  # Проходим по копии списка, чтобы избежать проблем с изменением размера
             if task.task.lower() == task_name.lower(): #выполняется проверка на совпадение названий задач
                 self.tasks.remove(task)
@@ -41,14 +40,14 @@ class ToDoList:
                 return
         print(f"Задача '{task_name}' не найдена.")
             
-    def complete_task(self, task_complete):
-        task_to_complete = input("Введите название задачи которая выполнена: ").strip()
+    def complete_task(self):
+        task_name = input("Введите название задачи которая выполнена: ").strip().lower()
         for task in self.tasks[:]:  # Проходим по копии списка, чтобы избежать проблем с изменением размера
-            if task.task.lower() == task_complete.lower(): #выполняется проверка на совпадение названий задач
+            if task.task.lower() == task_name.lower(): #выполняется проверка на совпадение названий задач
                 task.status = "Complete"
-                print(f"Задача '{task_complete}' успешно выполнена.")
+                print(f"Задача '{task_name}' успешно выполнена.")
                 return
-            print(f"Задача '{task_complete}' не найдена.")
+            print(f"Задача '{task_name}' не найдена.")
            
            
 todoList = ToDoList()
@@ -78,12 +77,11 @@ def main():
             print("Выход из программы.")
             break
         elif choice in menu:
-            action = menu[choice]["func"]
-            if action:
-                action(main)
+            action = menu[choice]['func']
+            if callable(action):
+                action()
         else:
             print("Неверный выбор. Повторите ввод.")
-
 
 if __name__ == "__main__":
     main()
