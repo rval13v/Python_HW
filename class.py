@@ -1,6 +1,6 @@
 class Task:
-    def __init__(self, task, period, owner_task, status="Incomplete"): #Конструктор класса принимает четыре параметра: task (название задачи), period (количество дней),
-    # owner_task (ответственный исполнитель) и статус (status), которое по умолчанию равно "Incomplete" («не выполнено»).
+    def __init__(self, task, period, owner_task, status): #Конструктор класса принимает четыре параметра: task (название задачи), period (количество дней),
+    # owner_task (ответственный исполнитель) и статус (status)
         self.task = task # Внутри конструктора задаются свойства экземпляра класса. хранит название задачи.
         self.period = period # хранит срок выполнения в днях.
         self.owner_task = owner_task # хранит имя исполнителя.
@@ -48,11 +48,11 @@ class ToDoList:
            
 todoList = ToDoList()
 
-status = "In Progress"
+status = "Incomplete"
 todoList.add_task(Task("Разработка дизайна интерфейса", 7, "Иванов Иван", status))
-todoList.add_task(Task("Проведение тестирования нового функционала", 3, "Иванова Анна"))
-todoList.add_task(Task("Создание прототипа веб-приложения", 10, "Петрова Мария"))  
-todoList.add_task(Task("Организация новогоднего праздника", 15, "Сидоров Алексей"))         
+todoList.add_task(Task("Проведение тестирования нового функционала", 3, "Иванова Анна", status))
+todoList.add_task(Task("Создание прототипа веб-приложения", 10, "Петрова Мария", status))  
+todoList.add_task(Task("Организация новогоднего праздника", 15, "Сидоров Алексей", status))         
 
 
 print(todoList)
