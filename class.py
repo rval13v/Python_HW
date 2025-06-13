@@ -6,7 +6,7 @@ class Task:
         self.owner_task = owner_task # хранит имя исполнителя.
         self.status = status # хранит статус задачи 
 
-    def __str__(self): # Возвращает красивую строку представления задачи.
+    def __str__(self): # Возвращает строку представления задачи.
         return f"Тask: {self.task}, Period: {self.period} days, Owner: {self.owner_task}, Status: {self.status}"
         
 class ToDoList:
@@ -37,20 +37,32 @@ class ToDoList:
                 return
         print(f"Задача '{task_name}' не найдена.")
             
+    def complete_task(self, task_complete):
+         for task in self.tasks[:]:  # Проходим по копии списка, чтобы избежать проблем с изменением размера
+            if task.task.lower() == task_complete.lower(): #выполняется проверка на совпадение названий задач
+                task.status = "Complete"
+                print(f"Задача '{task_complete}' успешно выполнена.")
+                return
+            print(f"Задача '{task_complete}' не найдена.")
+           
            
 todoList = ToDoList()
 
-todoList.add_task(Task("Разработка дизайна интерфейса", 7, "Иванов Иван", "Complete"))
-todoList.add_task(Task("Проведение тестирования нового функционала", 3, "Иванова Анна", "Complete"))
-todoList.add_task(Task("Создание прототипа веб-приложения", 10, "Петрова Мария", "Complete"))  
-todoList.add_task(Task("Организация новогоднего праздника", 15, "Сидоров Алексей", "Complete"))         
+status = "In Progress"
+todoList.add_task(Task("Разработка дизайна интерфейса", 7, "Иванов Иван", status))
+todoList.add_task(Task("Проведение тестирования нового функционала", 3, "Иванова Анна"))
+todoList.add_task(Task("Создание прототипа веб-приложения", 10, "Петрова Мария"))  
+todoList.add_task(Task("Организация новогоднего праздника", 15, "Сидоров Алексей"))         
 
 
 print(todoList)
 
-task_to_remove = input("Введите название задачи удаления: ").strip()
+task_to_remove = input("Введите название задачи для удаления: ").strip()
 todoList.remove_task(task_to_remove)
 
+
+task_to_complete = input("Введите название задачи которая выполнена: ").strip()
+todoList.complete_task(task_to_complete)
+
 print(todoList)
 
- 
