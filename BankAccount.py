@@ -5,7 +5,7 @@ class BankAccount:
     def deposit(self, amount):
         if amount > 0:
             self._balance += amount
-            print(f"Внесён депозит на сумму {amount}. Текущий баланс: $ {self._balance}")
+            print(f"Внесён депозит на сумму {amount}. Текущий баланс: ${self._balance}")
         else:
             print("Сумма депозита должна быть положительной.")
 
