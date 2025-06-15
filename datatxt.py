@@ -28,17 +28,15 @@ def write_file(text, mode='a'):
     except PermissionError:
         print("Нет прав доступа к файлу.")
 
-def copy_file(original_file, new_file):
+def copy_file(original_filename, new_filename):
     try:
-        with open(original_file, 'rb') as org_f,\
-            open(new_file, 'wb') as nw_f:
-                nw_f.write(org_f.read())
+        with open(original_filename, 'rb') as current_file, \
+            open(new_filename, 'wb') as target_file:
+                target_file.write(current_file.read())
     except FileNotFoundError:
         print("Исходный файл не найден.")
     except IOError:
         print("Ошибка при копировании файла.")
-    except Exception as e:
-        print("Возникла неизвестная ошибка: {e}")
                 
 
 read_file('r')
