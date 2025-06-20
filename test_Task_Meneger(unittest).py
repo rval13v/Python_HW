@@ -1,7 +1,14 @@
 import unittest
+import json
+import os
+
 from Task_Manager import TaskManager
 
 class TestTaskManager(unittest.TestCase):
+    test_filename = "tasks.json.txt"
+
+    def setUp(self):
+        self.todo_list = TaskManager()
 
     def test_remove_task(self):
         todo_list = TaskManager()
@@ -20,18 +27,26 @@ class TestTaskManager(unittest.TestCase):
         self.assertIn("Купить пиво", [task['description'] for task in todo_list.tasks])
         
     def test_complete_task(self):
-        todo_list = TaskManager()
-        todo_list.add_task("Купить пиво") 
-        self.assertTrue(todo_list.complete_task)  
+        self.todo_list.add_task("Купить пиво")
+        self.todo_list.complete_task(0)
+        self.assertTrue(self.todo_list.tasks[0]['completed'])  
 
-    def test_save_to_json(self):
-        test_data = {"Купить продукты"}  
-        filename = "tasks.json.txt"
+    def tearDown(self):
+        try:
+            import os
+            os.remove(self.test_filename)
+        except OSError:
+            pass
 
+    def test_save_and_load_json(self):
+        self.todo_list.add_task("Купить пиво")
+        self.todo_list.save_to_json(self.test_filename)
+
+        new_todo_list = TaskManager()
+        new_todo_list.load_from_json(self.test_filename)
+
+        self.assertEqual(new_todo_list.tasks, self.todo_list.tasks)
         
- 
 
-
-        
 if __name__ == '__main__':
     unittest.main()
