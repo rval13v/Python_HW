@@ -6,6 +6,8 @@ class TaskManager:
         self.tasks = []  # Пустой список задач
     
     def __str__(self):
+        if not self.tasks:
+            return "Список задач пуст."
         result = ""
         for index, task in enumerate(self.tasks):
             status = "завершена" if task["completed"] else "активна"
@@ -18,7 +20,7 @@ class TaskManager:
             if task["description"] == description:
                 print("Такая задача уже существует.")
                 return
-        # Если задачи нет, добавляем её
+        # Если задача уникальна, добавляем её
         self.tasks.append({"description": description, "completed": False})
         
     def complete_task(self, index: int):
@@ -53,24 +55,25 @@ class TaskManager:
 
 todo_list = TaskManager()
 
+
 todo_list.add_task("Купить продукты")
 todo_list.add_task("Сделать домашнюю работу")
 todo_list.add_task("Ничего не делать")
 todo_list.add_task("Сделать все")
 
-# Выводим список задач
-print(todo_list)
-
-
-todo_list.complete_task(1)
-todo_list.remove_task(5)
 
 print(todo_list)
 
-# Сохраняем задачи в файл
+
+todo_list.complete_task(1)  
+todo_list.remove_task(3)
+
+
+print(todo_list)
+
+
 todo_list.save_to_json("tasks.json.txt")
 print("Задачи сохранены в файл tasks.json")
 
 todo_list.load_from_json("tasks.json.txt")
 print("Задачи загружены из файла tasks.json")
-
